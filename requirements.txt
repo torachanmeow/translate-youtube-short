@@ -1,0 +1,4 @@
+yt-dlp
+transformers
+deep-translator
+git+https://github.com/openai/whisper.git
