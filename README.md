@@ -83,12 +83,19 @@ translation_xaA_hQ4EDE0.txt
 
 ## ⚖ ライセンス・利用について
 
-このツールは**個人利用またはクローズドな用途**を想定しています。  
-コードは MIT ライセンスに準拠しており、自由に利用・改変可能ですが、**翻訳結果の再配布や商用利用における責任は一切負いません**。
+このツールは MIT ライセンスのもとで公開されています。  
+**個人利用または非商用のクローズド用途**を想定しており、自由に改変・再配布が可能です。
 
-> Whisperモデルや翻訳エンジンの仕様変更により、将来的に動作しなくなる可能性もあります。
+ただし、本ツールは以下の外部OSSライブラリに依存しており、それぞれに独自のライセンスが適用されます：
 
----
+- [`transformers`](https://github.com/huggingface/transformers)（Apache 2.0）
+- [`deep-translator`](https://github.com/nidhaloff/deep-translator)（MIT）※ Google翻訳の非公式ラッパーを使用
+- [`yt-dlp`](https://github.com/yt-dlp/yt-dlp)（Unlicense）
+- [`openai/whisper`](https://github.com/openai/whisper)（MIT）
+
+> ⚠️ **注意**：翻訳処理には Deep Translator による Google 翻訳の Web ラッパーが使われています。  
+> Google が提供する正式な API を利用しているわけではなく、商用・大量翻訳などに利用する場合は、  
+> Google の[利用規約](https://policies.google.com/terms?hl=ja)に反しないよう十分ご注意ください。
 
 ## 🙋‍♂️ 備考
 
