@@ -10,3 +10,10 @@ venv/
 
 # Translation outputs
 translation_*.txt
+
+# Temporary audio files
+*.mp3
+*.wav
+
+# Demucs output folder
+separated/

@@ -107,7 +107,30 @@ def save_translation_log(video_title, video_url, video_id, zh_text, ja_text, lan
         f.write("🔈 音声認識結果:\n")
         f.write(format_text(zh_text) + "\n\n")
         f.write(f"🌐 {lang_config['label']} ⇒ 日本語訳:\n")
-        f.write(format_text(ja_text) + "\n")
+        f.write(format_text(ja_text) + "\n\n")
+
+        # --- 生成AI向けプロンプト付与 ---
+        f.write("📄 生成AI用プロンプト:\n")
+        f.write("生成AI（ChatGPTなど）に貼り付けて翻訳を依頼するためのテンプレートです。\n")
+        f.write("この点線より下を **すべてコピーして** 貼り付けてください。\n")
+        f.write("\n-----------------------------\n")
+        f.write("以下の音声認識テキストを、日本語として自然な文章に翻訳してください。\n")
+        f.write("出力に統一感が出るよう、以下の条件に従ってください。\n\n")
+        f.write("【翻訳条件】\n")
+        f.write(f"- 翻訳元の言語は「{lang_config['label']}」です。\n")
+        f.write("- 意味が自然に区切れる単位で1行ごとに翻訳してください。\n")
+        f.write("- 各行は「原文 → 翻訳」の形式で出力してください。\n")
+        f.write("- 直訳を基本にしつつ、日本語として自然になるように調整してください。\n")
+        f.write("- キャラの口調や雰囲気（煽り、焦りなど）をできるだけ反映してください。\n")
+        f.write("- 罵倒語・スラング・ギャグ表現のニュアンスも可能な範囲で訳出してください。\n")
+        f.write("【出力形式】\n")
+        f.write("原文：～～～\n")
+        f.write("翻訳：～～～\n\n")
+        f.write(f"🎬 タイトル: {video_title}\n")
+        f.write(f"🔗 URL: {video_url}\n\n")
+        f.write("🔈 原文:\n")
+        f.write(format_text(zh_text) + "\n")
+    
     print(f"\n✅ 結果を {filename} に保存しました。")
 
 # --- メイン実行 ---
