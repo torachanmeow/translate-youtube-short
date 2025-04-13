@@ -1,4 +1,7 @@
 yt-dlp
-transformers
+torch
+numpy
+soundfile
 deep-translator
-git+https://github.com/openai/whisper.git
+demucs
+git+https://github.com/openai/whisper.git@main
