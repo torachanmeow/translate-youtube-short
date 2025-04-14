@@ -145,7 +145,7 @@ if __name__ == "__main__":
     print("\n🌍 翻訳元の言語を選択してください：")
     for key, val in LANGUAGE_MAP.items():
         print(f"{key}. {val['label']}（{val['translator']}）")
-    lang_num = input("番号を入力（1〜3）: ").strip()
+    lang_num = input(f"番号を入力（1〜{len(LANGUAGE_MAP)}）: ").strip()
 
     lang_config = LANGUAGE_MAP.get(lang_num)
     if not lang_config:

@@ -1,3 +1,5 @@
+詳しいセットアップ手順については [SETUP_WINDOWS_USER.md](./SETUP_WINDOWS_USER.md) をご覧ください。
+
 # 🎧 YouTube Shorts 字幕翻訳ツール（Whisper + DeepTranslator）
 
 YouTubeショート動画の音声を自動で文字起こしし、日本語に翻訳するツールです。  
@@ -21,28 +23,11 @@ Google翻訳は翻訳精度が不十分な場合もあるため、**生成AI（C
 ## 🧩 動作環境
 
 - Python：3.10 ～ 3.13（3.13動作確認済み）
-- `ffmpeg`：インストール済でパスが通っていること -- 💡 ffmpeg の導入については [公式サイト](https://ffmpeg.org/download.html) を参照してください。
-- `demucs`：仮想環境内にインストール済であること（venv/Scripts/demucs.exe）
+- `ffmpeg`：インストール済でパスが通っていること（[公式サイト](https://ffmpeg.org/download.html) 参照）
+- `demucs`：仮想環境内にインストールされていること（`venv/Scripts/demucs.exe`）
 
 > ✅ **仮想環境（venv）前提での運用を推奨します。**  
 > `demucs` 実行は `venv/Scripts/demucs.exe` を明示的に使用します。
-
----
-
-## 📦 セットアップ手順
-
-### 1. 仮想環境の作成と有効化
-
-```bash
-python -m venv venv
-venv\Scripts\activate    # Windows の場合
-```
-
-### 2. 依存パッケージのインストール
-
-```bash
-pip install --no-cache-dir -r requirements.txt
-```
 
 ---
 
@@ -52,28 +37,11 @@ pip install --no-cache-dir -r requirements.txt
 python translate_youtube_short.py
 ```
 
-実行すると、以下のように対話形式で進行します：
+実行後、以下の対話が表示されます：
 
 1. 🎞 **YouTube Shorts のURL** を入力  
-2. 🌍 **翻訳元の言語** を以下から番号で選択 
-   ```
-   1. 英語（en）
-   2. 中国語・簡体字（zh）
-   3. 中国語・繁体字（zh-TW）
-   4. 韓国語（ko）
-   5. インドネシア語（id）
-   ```
-
-3. 自動で以下の処理を実施：
-
-   - YouTube音声を `.mp3` でダウンロード
-   - `.wav` に変換（音量正規化）
-   - Demucs によりセリフ音声だけを分離
-   - FFmpeg によるノイズ除去
-   - Whisper が文字起こし（`openai/whisper-medium` モデル使用）
-   - DeepTranslator による日本語翻訳
-   - 結果ログを `translation_<動画ID>.txt` に保存
-   - 中間ファイルを削除（MP3 / WAV）
+2. 🌍 **翻訳元の言語** を番号で選択  
+3. 文字起こし・翻訳処理が自動で進行し、`translation_<動画ID>.txt` に保存されます。
 
 ---
 
@@ -93,9 +61,9 @@ translation_<動画ID>.txt
 
 ---
 
-## 🔧 言語設定のカスタマイズについて
+## 🔧 言語設定のカスタマイズ
 
-本ツールでは、`translate_youtube_short.py` 内の `LANGUAGE_MAP` を編集することで、翻訳元の言語を自由に追加・変更できます。
+`translate_youtube_short.py` 内の `LANGUAGE_MAP` を編集することで、翻訳対象言語を自由に追加できます。
 
 ```python
 LANGUAGE_MAP = {
@@ -107,33 +75,25 @@ LANGUAGE_MAP = {
 }
 ```
 
-- `label`: ユーザーに表示する言語名
-- `whisper`: Whisper に渡す言語コード（ISO 639-1 準拠）
-- `translator`: Deep Translator に渡す翻訳用の言語コード
-
-> ✅ これにより、**スペイン語・ヒンディー語・ロシア語・ベトナム語**なども容易に追加できます。
-
 ---
 
 ## ⚖ ライセンス・利用について
 
-このツールは MIT ライセンスのもとで公開されています。  
-**個人利用または非商用のクローズド用途**を想定しており、自由に改変・再配布が可能です。
+このツールは MIT ライセンスです（個人・非商用利用向け）。  
+以下のOSSに依存しています：
 
-ただし、本ツールは以下の外部OSSライブラリに依存しており、それぞれに独自のライセンスが適用されます：
+- [`openai/whisper`](https://github.com/openai/whisper)
+- [`yt-dlp`](https://github.com/yt-dlp/yt-dlp)
+- [`deep-translator`](https://github.com/nidhaloff/deep-translator)
+- [`demucs`](https://github.com/facebookresearch/demucs)
+- [`ffmpeg`](https://ffmpeg.org/)
 
-- [`openai/whisper`](https://github.com/openai/whisper)（MIT）
-- [`yt-dlp`](https://github.com/yt-dlp/yt-dlp)（Unlicense）
-- [`deep-translator`](https://github.com/nidhaloff/deep-translator)（MIT）※ Google翻訳の非公式ラッパーを使用
-- [`demucs`](https://github.com/facebookresearch/demucs)（MIT）
-- [`ffmpeg`](https://ffmpeg.org/)（LGPL/GPL）
+> ⚠️ Deep Translator は Google翻訳のWebラッパーを使用しています。商用利用には注意してください。
 
-> ⚠️ **注意**：翻訳処理には Deep Translator による Google 翻訳の Web ラッパーが使われています。  
-> Google が提供する正式な API を利用しているわけではなく、商用・大量翻訳などに利用する場合は、  
-> Google の[利用規約](https://policies.google.com/terms?hl=ja)に反しないよう十分ご注意ください。
+---
 
 ## 🙋‍♂️ 備考
 
-- Whisperモデルはローカルで実行され、APIキー等は不要です
-- 翻訳にはインターネット接続が必要です（DeepTranslator が Google翻訳へアクセス）
-- 長尺動画や非ショート動画は処理対象外です（1分程度推奨）
+- Whisperはローカル実行でAPIキー不要
+- 翻訳処理にはインターネット接続が必要
+- 長尺や通常のYouTube動画は対象外（ショート推奨）
