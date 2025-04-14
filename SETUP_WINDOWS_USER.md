@@ -11,7 +11,7 @@ YouTubeショートの音声を自動で文字起こしし、日本語に翻訳�
 |------------|------|----------------|
 | Python（3.10〜3.13） | ツールを動かすため | https://www.python.org/downloads/ |
 | FFmpeg | 音声変換・ノイズ除去 | https://ffmpeg.org/download.html |
-| Git（任意） | Gitクローンで取得する場合 | https://git-scm.com/ |
+| Git | Whisperライブラリのインストールに必要 | https://git-scm.com/ |
 
 ---
 
@@ -60,7 +60,7 @@ cd translate-youtube-short
 2. 展開またはクローンしたフォルダに移動
 
 ```bash
-cd パス\translate-youtube-short-main  # ZIP展開時の例
+cd パス\translate-youtube-short-main
 ```
 
 3. 仮想環境を作成して有効化
@@ -77,8 +77,12 @@ venv\Scripts\activate
 初回のみ、必要なライブラリをインストールします
 
 ```bash
+python -m pip install --upgrade pip
 pip install --no-cache-dir -r requirements.txt
 ```
+> 💡 venv に含まれる pip は古い場合があります。最新版にアップデートしておくことで、依存関係の問題やエラーを防げます。
+
+> ⚠️ `openai-whisper` は GitHub から直接インストールされるため、Git が必須です。
 
 ---
 
@@ -121,6 +125,6 @@ pause
 
 ## 💬 補足・トラブル時の対応
 
-- **FFmpeg や Python が正しくインストール・設定されていない場合**、ツールは正しく動作しません
-- 特に、`ffmpeg.exe` のパスが環境変数 `Path` に通っていないとエラーになります
-- `venv`（仮想環境）を有効にしてから実行しないと、必要なライブラリが見つからず失敗します
+- `ffmpeg` や `python` のインストール・パス設定が正しくない場合、音声抽出に失敗します
+- `venv`（仮想環境） を有効にせずに `python` を実行すると、モジュールが見つからない場合があります
+- `git` がインストールされていないと `openai-whisper` のインストールに失敗します
