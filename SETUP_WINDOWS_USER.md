@@ -20,15 +20,13 @@ YouTubeショートの音声を自動で文字起こしし、日本語に翻訳�
 ### ZIPで取得する場合（初心者向け）
 
 1. リポジトリページを開く  
-   👉 [https://github.com/torachanmeow/translate-youtube-short](https://github.com/torachanmeow/translate-youtube-short)
+   👉 https://github.com/torachanmeow/translate-youtube-short
 
 2. 緑の「Code」ボタン → 「Download ZIP」
 
 3. ダウンロードしたZIPファイルを右クリック → 「すべて展開」
 
 ### Gitで取得する場合（Git導入済の方）
-
-コマンドプロンプトまたはPowerShellで次を実行：
 
 ```bash
 git clone https://github.com/torachanmeow/translate-youtube-short.git
@@ -39,7 +37,7 @@ cd translate-youtube-short
 
 ## 🧪 ステップ2：Python のインストール
 
-1. Python公式サイト：[https://www.python.org/downloads/](https://www.python.org/downloads/)
+1. Python公式サイト：https://www.python.org/downloads/
 
 2. インストール時に「Add Python to PATH」に必ずチェックを入れる
 
@@ -47,7 +45,7 @@ cd translate-youtube-short
 
 ## 🎧 ステップ3：FFmpeg のインストールとパス設定
 
-1. [https://www.gyan.dev/ffmpeg/builds/](https://www.gyan.dev/ffmpeg/builds/) より `ffmpeg-release-essentials.zip` をダウンロード
+1. https://www.gyan.dev/ffmpeg/builds/ より `ffmpeg-release-essentials.zip` をダウンロード
 
 2. 解凍し、`bin` フォルダのパスをコピー（例：`C:\tools\ffmpeg\bin`）
 
@@ -59,13 +57,13 @@ cd translate-youtube-short
 
 1. コマンドプロンプトを開く
 
-2. 展開またはクローンしたフォルダに移動：
+2. 展開またはクローンしたフォルダに移動
 
 ```bash
 cd パス\translate-youtube-short-main  # ZIP展開時の例
 ```
 
-3. 仮想環境を作成して有効化：
+3. 仮想環境を作成して有効化
 
 ```bash
 python -m venv venv
@@ -76,7 +74,7 @@ venv\Scripts\activate
 
 ## 📦 ステップ5：依存ライブラリのインストール（※初回のみ）
 
-初回のみ、必要なライブラリをインストールします：
+初回のみ、必要なライブラリをインストールします
 
 ```bash
 pip install --no-cache-dir -r requirements.txt
@@ -90,12 +88,34 @@ pip install --no-cache-dir -r requirements.txt
 python translate_youtube_short.py
 ```
 
-実行すると、対話形式で次の入力が求められます：
+もしくは、以下の `run.bat` をダブルクリックして実行することもできます。
 
-1. YouTube Shorts のURL  
-2. 翻訳元の言語（番号で選択）
+---
 
-翻訳結果は `translation_<動画ID>.txt` に保存されます。
+## 🟢 Windows向け：run.bat での簡単起動
+
+仮想環境を構築済であれば、`run.bat` をダブルクリックするだけで翻訳ツールを実行できます。
+
+```bat
+@echo off
+setlocal
+
+if not exist "venv\Scripts\activate.bat" (
+    echo [ERROR] Python virtual environment not found.
+    echo Please follow these setup steps first:
+    echo   1. python -m venv venv
+    echo   2. venv\Scripts\activate.bat
+    echo   3. pip install -r requirements.txt
+    pause
+    exit /b
+)
+
+call venv\Scripts\activate.bat
+python translate_youtube_short.py
+pause
+```
+
+> 仮想環境を作成していない場合は、先にステップ4～5を実行してください。
 
 ---
 
